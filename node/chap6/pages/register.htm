@@ -1,0 +1,91 @@
+<html lang="em">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example - Chap 6 Register</title>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <style type="text/css">
+            .css-form input.ng-invalid.ng-dirty {
+                background-color: #FA787E;       
+            }
+            .css-form input.ng-valud.ng-dirty {
+                background-color: #78FA89;
+            }
+        </style>
+    </head>
+    <body ng-app="formExample">
+        <div ng-controller="ExampleController">
+            <form novalidate name="formx" class="css-form col-md-12">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text"
+                        class="form-control" 
+                        name="name"
+                        ng-model="user.name"
+                        required
+                        value="" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text"
+                        class="form-control"
+                        name="email"
+                        ng-model="user.email"
+                        value="" />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password"
+                        class="form-control"
+                        name="password"
+                        ng-model="user.password"
+                        value="" />
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password"
+                        class="form-control"
+                        name="passwordx"
+                        ng-model="user.passwordx"
+                        value="" />
+                </div>
+                <button class="btn btn-default" ng-click="reset()">Reset</button>
+                <button class="btn btn-primary"
+                    ng-click="update(user)">Save</button>
+            </form>
+        </div>
+        <script>
+            angular.module('formExample',[])
+                .controller('ExampleController',['$scope','$http', function($scope, $http) {
+                    $scope.master = {};
+                    $scope.update = function(user) {
+                        if ($scope.formx.$valid) {
+                            $scope.master = angular.copy(user);
+                            $http.post('http://localhost:3002/post',
+                                $scope.master)
+                                .success(function(d,s,h,c) {
+                                    alert('Success!');
+                                })
+                                .error(function(d,s,h,c) {
+                                    alert('Error!!!!!');
+                                });
+                        } else {
+                            alert('The form is not valid');
+                        }
+                        
+                    };
+                    $scope.reset = function() {
+                        $scope.user = angular.copy($scope.master);
+                    };
+                    $scope.reset();
+                }]);
+        </script>
+    </body>
+</html>
