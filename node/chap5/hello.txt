@@ -1,0 +1,1 @@
+Hello from the Node writeFile method!appending to end of file.
