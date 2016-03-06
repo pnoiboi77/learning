@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+        <script type="text/javascript">
+            jQuery.support.cors = true;
+            function ajax(url, data) {
+                var myData = JSON.stringify(data);
+                jQuery.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: myData,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    processData: true,
+                    success: function (resp, ts, xhr) {
+                        var message;
+                        
+                        try {
+                            obj = JSON.parse(resp);                                message = obj.message;                       
+                        } catch (a) {
+                            message = resp.message;
+                        }
+                        $('#test').text(message);
+                    },
+                    error: function(xhr, ts, e) {
+                        $('#test').text(e);
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="test"></div>
+        <button onclick="ajax('http://localhost:3000/api','');">Send API Call</button>
+    </body>
+</html>
