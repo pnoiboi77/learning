@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="maintenance">
+    <head>
+        <title>Dive Sites</title>        
+        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link
+        href="css/site.css" rel="stylesheet" />        
+    </head>
+    <body ng-controller="adminCtrl">
+        <!-- nav header -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#adminMenu">
+                    <span class="sr-only">
+                        Toggle Navigation
+                    </span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    Younderwater Admin
+                </a>
+                <div class="collapse navbar-collapse"
+                    id="adminMenu">
+                    <ul class="nav navbar-nav">
+                        <li 
+                        ng-class="{active: isActive('Locations')}">
+                            <a href="#/locations">Locations</a>
+                        </li>
+                        <li
+                        ng-class="{active: isActive('Sites')}">
+                            <a href="#/sites">
+                                Dive Sites
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- option title bar -->
+        <div class="current-spot">
+            <div class="container-fluid">
+                <div class="container">
+                    <div ng-show="view=='locations'">
+                        <h3>Manage the list of diving locations</h3>
+                    </div>
+                    <div ng-show="view=='diveSites'">
+                        <h3>Manage the list of dive sites</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- view content -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="container">
+                    <div ng-view></div>
+                </div>
+            </div>
+        </div>
+                
+        <script src="../node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <script href="../node_modules/bootstrap/dist/js/bootstrap.min.js" rel="stylesheet"></script>
+        <script src="../node_modules/angular/angular.min.js" type="text/javascript"></script>
+        <script src="../node_modules/angular-route/angular-route.min.js" type="text/javascript"></script>
+        <script src="js/maintenance.js" type="text/javascript"></script>        
+    </body>
+</html>
