@@ -21,18 +21,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#/main">
                     Younderwater Admin
                 </a>
                 <div class="collapse navbar-collapse"
                     id="adminMenu">
                     <ul class="nav navbar-nav">
-                        <li 
-                        ng-class="{active: isActive('Locations')}">
+                        <li yw-menu-id="Locations">
                             <a href="#/locations">Locations</a>
                         </li>
-                        <li
-                        ng-class="{active: isActive('Sites')}">
+                        <li yw-menu-id="Sites">
                             <a href="#/sites">
                                 Dive Sites
                             </a>
@@ -44,14 +42,9 @@
         
         <!-- option title bar -->
         <div class="current-spot">
-            <div class="container-fluid">
+            <div class="container-fluid" ng-show="!isActive('')">
                 <div class="container">
-                    <div ng-show="view=='locations'">
-                        <h3>Manage the list of diving locations</h3>
-                    </div>
-                    <div ng-show="view=='diveSites'">
-                        <h3>Manage the list of dive sites</h3>
-                    </div>
+                    <h3>{{getTitle()}}</h3>
                 </div>
             </div>
         </div>
